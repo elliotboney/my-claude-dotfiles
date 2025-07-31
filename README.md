@@ -3,32 +3,32 @@
 
 ### Development Workflow
 
-- `/bunify-scripts` - Convert shell scripts to Bun TypeScript scripts
-- `/changelog [version or date range]` - Generate comprehensive changelog from git commits
-- `/commit` - Smart commit with generated message and push
-- `/commit-and-push` - Smart commit with generated message and push
-- `/optimize` - Analyze code performance and suggest optimizations
-- `/todo` - Manage project todos in todos.md file
-- `/visualize <target>` - Generate explanatory diagrams from code and architecture
+- [`/bunify-scripts`](commands/user/bunify-scripts.md) - Convert shell scripts to Bun TypeScript scripts
+- [`/changelog [version or date range]`](commands/user/changelog.md) - Generate comprehensive changelog from git commits
+- [`/commit`](commands/user/commit.md) - Smart commit with generated message and push
+- [`/commit-and-push`](commands/user/commit-and-push.md) - Smart commit with generated message and push
+- [`/optimize`](commands/user/optimize.md) - Analyze code performance and suggest optimizations
+- [`/todo`](commands/user/todo.md) - Manage project todos in todos.md file
+- [`/visualize <target>`](commands/user/visualize.md) - Generate explanatory diagrams from code and architecture
 
 ### Analysis & Reflection
 
-- `/think [problem]` - Basic analytical thinking
-- `/think-harder [problem]` - Enhanced analytical thinking
-- `/think-ultra [complex problem]` - Ultra-comprehensive analysis
-- `/ultrathink <task>` - Use 4 agents to evaluate a coding pow-wow
-- `/reflection` - Analyze and improve Claude Code instructions
-- `/reflection-harder` - Comprehensive session analysis and learning
+- [`/think [problem]`](commands/user/think.md) - Basic analytical thinking
+- [`/think-harder [problem]`](commands/user/think-harder.md) - Enhanced analytical thinking
+- [`/think-ultra [complex problem]`](commands/user/think-ultra.md) - Ultra-comprehensive analysis
+- [`/ultrathink <task>`](commands/user/ultrathink.md) - Use 4 agents to evaluate a coding pow-wow
+- [`/reflection`](commands/user/reflection.md) - Analyze and improve Claude Code instructions
+- [`/reflection-harder`](commands/user/reflection-harder.md) - Comprehensive session analysis and learning
 
 ### Problem Solving
 
-- `/findoptions` - Analyze different approaches for a task or problem
-- `/five` - Use the five why's process to evaluate issues
-- `/summary` - Generate comprehensive summaries from current chat
+- [`/findoptions`](commands/user/findoptions.md) - Analyze different approaches for a task or problem
+- [`/five`](commands/user/five.md) - Use the five why's process to evaluate issues
+- [`/summary`](commands/user/summary.md) - Generate comprehensive summaries from current chat
 
 ### Documentation & Knowledge
 
-- `/create-command [name] [description]` - Create new Claude Code commands
+- [`/create-command [name] [description]`](commands/user/create-command.md) - Create new Claude Code commands
 
 
 ## Agents
@@ -36,22 +36,23 @@
 The `agents/` directory contains specialized AI [subagents](https://docs.anthropic.com/en/docs/claude-code/sub-agents) that extend Claude Code's capabilities.
 
 ### Analysis & Documentation
-- **instruction-reflector** - Analyzes and improves Claude Code instructions
-- **deep-reflector** - Comprehensive session analysis and learning capture
-- **deep-thinker** - Enhanced analytical thinking for complex problems
-- **ultra-thinker** - Ultra-comprehensive analytical thinking
-- **insight-documenter** - Technical breakthrough documentation specialist
+- [**instruction-reflector**](agents/instruction-reflector.md) - Analyzes and improves Claude Code instructions
+- [**deep-reflector**](agents/deep-reflector.md) - Comprehensive session analysis and learning capture
+- [**deep-thinker**](agents/deep-thinker.md) - Enhanced analytical thinking for complex problems
+- [**ultra-thinker**](agents/ultra-thinker.md) - Ultra-comprehensive analytical thinking
+- [**insight-documenter**](agents/insight-documenter.md) - Technical breakthrough documentation specialist
 
 ### Development & Engineering
-- **ui-engineer** - UI/UX development specialist
-- **ux-ui-designer** - User experience design and interface creation expert
-- **typescript-react-code-reviewer** - TypeScript, React, and Next.js code review specialist
-- **senior-dev-test-architect** - Senior developer for code review, refactoring, and test strategies
-- **devops-platform-engineer** - Cloud infrastructure, CI/CD, and platform reliability expert
+- [**ui-engineer**](agents/ui-engineer.md) - UI/UX development specialist
+- [**ux-ui-designer**](agents/ux-ui-designer.md) - User experience design and interface creation expert
+- [**typescript-react-code-reviewer**](agents/typescript-react-code-reviewer.md) - TypeScript, React, and Next.js code review specialist
+- [**senior-dev-test-architect**](agents/senior-dev-test-architect.md) - Senior developer for code review, refactoring, and test strategies
+- [**devops-platform-engineer**](agents/devops-platform-engineer.md) - Cloud infrastructure, CI/CD, and platform reliability expert
 
 ### Product & Process
-- **product-owner-process-steward** - Product artifacts validation and documentation consistency
-- **command-creator** - Expert at creating new Claude Code custom commands
+- [**product-owner-process-steward**](agents/product-owner-process-steward.md) - Product artifacts validation and documentation consistency
+- [**command-creator**](agents/command-creator.md) - Expert at creating new Claude Code custom commands
+- [**strategic-analyst-ideator**](agents/strategic-analyst-ideator.md) - Market research, competitive analysis, brainstorming, and project discovery
 
 
 ## Other
