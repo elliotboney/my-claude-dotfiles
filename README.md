@@ -1,3 +1,6 @@
+# My Cursor Dotfiles
+
+Hey all! Just stashing my personal collection of dotfiles for cursor that I'm using. Some are made by me, some are yoinked from others and modified and some might just be yoinked. 
 
 ## Commands
 
