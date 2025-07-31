@@ -1,0 +1,29 @@
+
+
+projects/
+todos/
+ide/
+
+# Temporary and cache files
+**/.DS_Store
+**/Thumbs.db
+
+
+CLAUDE.md
+
+
+# Shell snapshots (may contain sensitive command history)
+shell-snapshots/
+
+.anthropic
+statsig
+
+
+# Allow agents and commands directories
+!agents/
+!agents/**
+!commands/
+!commands/**
+
+# Allow CLAUDE.md and settings.json (non-sensitive config)
+!settings.json
