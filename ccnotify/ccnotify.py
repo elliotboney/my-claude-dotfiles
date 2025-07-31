@@ -224,7 +224,7 @@ class ClaudePromptTracker:
         try:
             cmd = [
                 'terminal-notifier',
-                '-sound', 'Bubble',
+                '-sound', '"Bottle"',
                 '-title', title,
                 '--appicon', 'https://logo.svgcdn.com/l/claude-icon-8x.png',
                 '-subtitle', f"{subtitle}\n{current_time}"

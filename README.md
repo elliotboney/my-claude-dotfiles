@@ -57,6 +57,28 @@ The `agents/` directory contains specialized AI [subagents](https://docs.anthrop
 - [**command-creator**](agents/command-creator.md) - Expert at creating new Claude Code custom commands
 - [**strategic-analyst-ideator**](agents/strategic-analyst-ideator.md) - Market research, competitive analysis, brainstorming, and project discovery
 
+### Language Specialists
+- [**javascript-pro**](agents/javascript-pro.md) - Master modern JavaScript with ES6+, async patterns, and Node.js APIs
+- [**php-pro**](agents/php-pro.md) - Write idiomatic PHP code with modern features and performance optimizations
+- [**python-pro**](agents/python-pro.md) - Write idiomatic Python code with advanced features and optimizations
+- [**sql-pro**](agents/sql-pro.md) - Write complex SQL queries, optimize execution plans, and design normalized schemas
+
+### Data & AI
+- [**ai-engineer**](agents/ai-engineer.md) - Build LLM applications, RAG systems, and prompt pipelines
+- [**data-engineer**](agents/data-engineer.md) - Build ETL pipelines, data warehouses, and streaming architectures
+- [**data-scientist**](agents/data-scientist.md) - Data analysis expert for SQL queries, BigQuery operations, and data insights
+- [**ml-engineer**](agents/ml-engineer.md) - Implement ML pipelines, model serving, and feature engineering
+- [**mlops-engineer**](agents/mlops-engineer.md) - Build ML pipelines, experiment tracking, and model registries
+- [**prompt-engineer**](agents/prompt-engineer.md) - Optimizes prompts for LLMs and AI systems
+
+### Infrastructure & Operations
+- [**database-optimizer**](agents/database-optimizer.md) - Optimize SQL queries, design efficient indexes, and handle database migrations
+- [**deployment-engineer**](agents/deployment-engineer.md) - Configure CI/CD pipelines, Docker containers, and cloud deployments
+
+### Specialized Domains
+- [**api-documenter**](agents/api-documenter.md) - Create OpenAPI/Swagger specs and write developer documentation
+- [**context-manager**](agents/context-manager.md) - Manages context across multiple agents and long-running tasks
+
 
 ## Other
 - I also use [ccnotify](https://github.com/dazuiba/CCNotify) to get pings when stuff is done. (Mac only)
