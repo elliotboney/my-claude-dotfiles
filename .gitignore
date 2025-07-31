@@ -27,3 +27,7 @@ statsig
 
 # Allow CLAUDE.md and settings.json (non-sensitive config)
 !settings.json
+
+
+ccnotify/ccnotify.db
+ccnotify/ccnotify.log
