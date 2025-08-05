@@ -30,4 +30,5 @@ statsig
 
 
 ccnotify/ccnotify.db
-ccnotify/ccnotify.log
+ccnotify/ccnotify.log.*
+**/*.backup

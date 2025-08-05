@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Claude Code Notify
+Claude Code Notify - Fixed Version
+Fixed SQL syntax error and added resource handling
 """
 
 import os
@@ -147,15 +148,23 @@ class ClaudePromptTracker:
             cwd = data.get('cwd', '')
             
             with sqlite3.connect(self.db_path) as conn:
-                # Update lastWaitUserAt for the latest record
-                conn.execute("""
-                    UPDATE prompt 
-                    SET lastWaitUserAt = CURRENT_TIMESTAMP
+                # FIXED: Use subquery instead of ORDER BY in UPDATE
+                cursor = conn.execute("""
+                    SELECT id FROM prompt 
                     WHERE session_id = ?
                     ORDER BY created_at DESC
                     LIMIT 1
                 """, (session_id,))
-                conn.commit()
+                
+                row = cursor.fetchone()
+                if row:
+                    record_id = row[0]
+                    conn.execute("""
+                        UPDATE prompt 
+                        SET lastWaitUserAt = CURRENT_TIMESTAMP
+                        WHERE id = ?
+                    """, (record_id,))
+                    conn.commit()
             
             self.send_notification(
                 title=os.path.basename(cwd) if cwd else 'Claude Task',
@@ -217,14 +226,14 @@ class ClaudePromptTracker:
             return "Unknown"
     
     def send_notification(self, title, subtitle, cwd=None):
-        """Send macOS notification using terminal-notifier"""
+        """Send macOS notification using terminal-notifier with better error handling"""
         from datetime import datetime
         current_time = datetime.now().strftime("%B %d, %Y at %H:%M")
         
         try:
             cmd = [
                 'terminal-notifier',
-                '-sound', '"Bottle"',
+                '-sound', 'Bottle',  # FIXED: Removed extra quotes
                 '-title', title,
                 '--appicon', 'https://logo.svgcdn.com/l/claude-icon-8x.png',
                 '-subtitle', f"{subtitle}\n{current_time}"
@@ -233,8 +242,22 @@ class ClaudePromptTracker:
             if cwd:
                 cmd.extend(['-execute', f'/usr/local/bin/code "{cwd}"'])
             
-            subprocess.run(cmd, check=False, capture_output=True)
-            logging.info(f"Notification sent: {title} - {subtitle}")
+            # FIXED: Better process handling to avoid resource contention
+            result = subprocess.run(
+                cmd, 
+                check=False, 
+                capture_output=True, 
+                timeout=5,  # Add timeout to prevent hanging
+                text=True
+            )
+            
+            if result.returncode != 0:
+                logging.warning(f"terminal-notifier returned non-zero: {result.stderr}")
+            else:
+                logging.info(f"Notification sent: {title} - {subtitle}")
+                
+        except subprocess.TimeoutExpired:
+            logging.error("Notification timeout - system may be busy")
         except FileNotFoundError:
             logging.warning("terminal-notifier not found, notification skipped")
         except Exception as e:
