@@ -24,7 +24,10 @@ Hey all! Just stashing my personal collection of dotfiles for cursor that I'm us
 - [`/reflection`](commands/user/reflection.md) - Analyze and improve Claude Code instructions
 - [`/reflection-harder`](commands/user/reflection-harder.md) - Comprehensive session analysis and learning
 - [`/full-review`](commands/user/full-review.md) - Comprehensive multi-perspective code review using specialized agents
+- [`/multi-agent-review`](commands/user/multi-agent-review.md) - Multi-agent code review with specialized reviewers
 - [`/performance-optimization`](commands/user/performance-optimization.md) - End-to-end application performance optimization
+- [`/multi-agent-optimize`](commands/user/multi-agent-optimize.md) - Optimize application stack using specialized optimization agents
+- [`/tech-debt`](commands/user/tech-debt.md) - Technical debt analysis and remediation
 
 ### Problem Solving
 
@@ -36,6 +39,12 @@ Hey all! Just stashing my personal collection of dotfiles for cursor that I'm us
 
 - [`/create-command [name] [description]`](commands/user/create-command.md) - Create new Claude Code commands
 - [`/improve-agent`](commands/user/improve-agent.md) - Analyze and improve existing agents based on performance patterns
+- [`/context-save`](commands/user/context-save.md) - Save current project context for future agent coordination
+- [`/context-restore`](commands/user/context-restore.md) - Restore saved project context for agent coordination
+
+### Development Tools
+
+- [`/api-mock`](commands/user/tools/api-mock.md) - API mocking framework for development and testing
 
 
 ## Agents
@@ -48,6 +57,7 @@ The `agents/` directory contains specialized AI [subagents](https://docs.anthrop
 - [**deep-thinker**](agents/deep-thinker.md) - Enhanced analytical thinking for complex problems
 - [**ultra-thinker**](agents/ultra-thinker.md) - Ultra-comprehensive analytical thinking
 - [**insight-documenter**](agents/insight-documenter.md) - Technical breakthrough documentation specialist
+- [**tutorial-engineer**](agents/tutorial-engineer.md) - Creates step-by-step tutorials and educational content from code
 
 ### Development & Engineering
 - [**ui-engineer**](agents/ui-engineer.md) - UI/UX development specialist
