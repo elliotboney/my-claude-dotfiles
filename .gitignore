@@ -32,3 +32,5 @@ statsig
 ccnotify/ccnotify.db
 ccnotify/ccnotify.log.*
 **/*.backup
+
+settings.json
