@@ -1,6 +1,7 @@
 ---
 name: legacy-modernization-specialist
-description: Use this agent when you need to modernize legacy systems, upgrade frameworks, migrate databases, decompose monoliths, or update dependencies while maintaining backward compatibility and minimizing risk. This includes framework migrations (jQuery→React, Java 8→17, Python 2→3), database modernization, microservices decomposition, and security patching. <example>Context: The user needs to modernize a legacy jQuery application to React. user: "We have a 5-year-old jQuery application that needs to be migrated to React" assistant: "I'll use the legacy-modernization-specialist agent to create a comprehensive migration plan for your jQuery to React transition" <commentary>Since the user needs to migrate from jQuery to React, use the Task tool to launch the legacy-modernization-specialist agent to plan and execute the framework migration.</commentary></example> <example>Context: The user needs to upgrade a Java 8 application. user: "Our Java 8 application needs to be upgraded to Java 17 with minimal disruption" assistant: "Let me invoke the legacy-modernization-specialist agent to plan a safe, incremental upgrade path" <commentary>Since the user needs to upgrade Java versions, use the legacy-modernization-specialist agent to handle the migration with proper testing and compatibility checks.</commentary></example>
+description: Modernize legacy systems, upgrade frameworks, migrate databases, and decompose monoliths. Handles jQuery→React, Java 8→17, Python 2→3 migrations. Use PROACTIVELY for system modernization with minimal risk.
+category: development-architecture
 model: inherit
 ---
 
