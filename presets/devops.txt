@@ -1,0 +1,5 @@
+devops-platform-engineer
+deployment-engineer
+cloud-run-specialist
+data-engineer
+mcp-server-architect

@@ -19,9 +19,13 @@ shell-snapshots/
 statsig
 
 
-# Allow agents and commands directories
-!agents/
-!agents/**
+# Agents directory contains only symlinks (not tracked)
+agents/*
+!agents/.gitkeep
+
+# Allow agents-library and commands directories
+!agents-library/
+!agents-library/**
 !commands/
 !commands/**
 
@@ -34,3 +38,6 @@ ccnotify/ccnotify.log.*
 **/*.backup
 
 settings.json
+
+history.jsonl
+

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Disable an agent by removing its symlink
+
+CLAUDE_DIR="$HOME/.claude"
+AGENTS_DIR="$CLAUDE_DIR/agents"
+
+AGENT_NAME="$1"
+
+if [[ -z "$AGENT_NAME" ]]; then
+    echo "Usage: agent-disable <agent-name>"
+    exit 1
+fi
+
+AGENT_LINK="$AGENTS_DIR/${AGENT_NAME}.md"
+
+if [[ ! -L "$AGENT_LINK" ]]; then
+    echo "Agent '$AGENT_NAME' is not currently enabled"
+    exit 1
+fi
+
+rm "$AGENT_LINK"
+echo "Disabled agent: $AGENT_NAME"

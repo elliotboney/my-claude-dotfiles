@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# List available and active agents
+
+CLAUDE_DIR="$HOME/.claude"
+AGENTS_DIR="$CLAUDE_DIR/agents"
+LIBRARY_DIR="$CLAUDE_DIR/agents-library"
+
+echo "=== ACTIVE AGENTS ==="
+if [[ -d "$AGENTS_DIR" ]] && [[ -n "$(ls -A "$AGENTS_DIR" 2>/dev/null)" ]]; then
+    ls "$AGENTS_DIR" | sed 's/\.md$//' | sed 's/^/✓ /'
+else
+    echo "  (none)"
+fi
+
+echo ""
+echo "=== AVAILABLE AGENTS BY CATEGORY ==="
+
+for category in dev review ops analysis specialized; do
+    echo ""
+    echo "📁 $category:"
+    if [[ -d "$LIBRARY_DIR/$category" ]]; then
+        for agent_file in "$LIBRARY_DIR/$category"/*.md; do
+            if [[ -f "$agent_file" ]]; then
+                agent_name=$(basename "$agent_file" .md)
+                if [[ -L "$AGENTS_DIR/${agent_name}.md" ]]; then
+                    echo "  ✓ $agent_name (active)"
+                else
+                    echo "    $agent_name"
+                fi
+            fi
+        done
+    else
+        echo "    (empty)"
+    fi
+done
+
+echo ""
+echo "=== SUMMARY ==="
+active_count=$(find "$AGENTS_DIR" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+total_count=$(find "$LIBRARY_DIR" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+echo "Active: $active_count/$total_count agents"

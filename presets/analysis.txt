@@ -1,0 +1,5 @@
+deep-thinker
+ultra-thinker
+strategic-analyst-ideator
+business-analyst
+data-scientist

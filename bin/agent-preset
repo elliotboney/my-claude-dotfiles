@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Apply a preset configuration
+
+CLAUDE_DIR="$HOME/.claude"
+AGENTS_DIR="$CLAUDE_DIR/agents"
+PRESETS_DIR="$CLAUDE_DIR/presets"
+
+PRESET_NAME="$1"
+
+if [[ -z "$PRESET_NAME" ]]; then
+    echo "Usage: agent-preset <preset-name>"
+    echo "Available presets:"
+    ls "$PRESETS_DIR" | sed 's/\.txt$//' | sed 's/^/  /'
+    exit 1
+fi
+
+PRESET_FILE="$PRESETS_DIR/${PRESET_NAME}.txt"
+
+if [[ ! -f "$PRESET_FILE" ]]; then
+    echo "Preset '$PRESET_NAME' not found"
+    echo "Available presets:"
+    ls "$PRESETS_DIR" | sed 's/\.txt$//' | sed 's/^/  /'
+    exit 1
+fi
+
+echo "Applying preset: $PRESET_NAME"
+
+# Clear current agents
+if [[ -d "$AGENTS_DIR" ]]; then
+    rm -f "$AGENTS_DIR"/*.md
+fi
+
+# Ensure agents directory exists
+mkdir -p "$AGENTS_DIR"
+
+# Enable agents from preset
+while IFS= read -r agent_name; do
+    # Skip empty lines and comments
+    if [[ -n "$agent_name" ]] && [[ ! "$agent_name" =~ ^# ]]; then
+        "$CLAUDE_DIR/bin/agent-enable" "$agent_name"
+    fi
+done < "$PRESET_FILE"
+
+echo ""
+echo "Preset '$PRESET_NAME' applied successfully!"
+echo ""
+"$CLAUDE_DIR/bin/agent-list"

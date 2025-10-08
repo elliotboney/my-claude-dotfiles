@@ -1,6 +1,6 @@
-# My Cursor Dotfiles
+# My Claude Code Dotfiles
 
-Hey all! Just stashing my personal collection of dotfiles for cursor that I'm using. Some are made by me, some are yoinked from others and modified and some might just be yoinked. 
+Hey all! Just stashing my personal collection of dotfiles for Claude Code that I'm using. Some are made by me, some are yoinked from others and modified and some might just be yoinked. 
 
 ## Commands
 
@@ -47,62 +47,118 @@ Hey all! Just stashing my personal collection of dotfiles for cursor that I'm us
 - [`/api-mock`](commands/user/tools/api-mock.md) - API mocking framework for development and testing
 
 
-## Agents
+## Agent Management System
 
-The `agents/` directory contains specialized AI [subagents](https://docs.anthropic.com/en/docs/claude-code/sub-agents) that extend Claude Code's capabilities.
+The agent system has been restructured for efficient context management. Instead of loading all 40 agents every time, you can now use project-specific presets that only load relevant agents.
 
-### Analysis & Documentation
-- [**instruction-reflector**](agents/instruction-reflector.md) - Analyzes and improves Claude Code instructions
-- [**deep-reflector**](agents/deep-reflector.md) - Comprehensive session analysis and learning capture
-- [**deep-thinker**](agents/deep-thinker.md) - Enhanced analytical thinking for complex problems
-- [**ultra-thinker**](agents/ultra-thinker.md) - Ultra-comprehensive analytical thinking
-- [**insight-documenter**](agents/insight-documenter.md) - Technical breakthrough documentation specialist
-- [**tutorial-engineer**](agents/tutorial-engineer.md) - Creates step-by-step tutorials and educational content from code
+### Directory Structure
+```
+~/.claude/
+├── agents/                 # Active agents (symlinks only - not tracked in git)
+├── agents-library/         # Full agent library organized by category
+│   ├── dev/               # Development & language specialists (10 agents)
+│   ├── review/            # Code review specialists (3 agents)
+│   ├── ops/               # DevOps & infrastructure (6 agents)
+│   ├── analysis/          # Analysis & thinking agents (6 agents)
+│   └── specialized/       # Specialized & utility agents (15 agents)
+├── presets/               # Project-specific agent configurations
+└── bin/                   # Agent management scripts
+```
 
-### Development & Engineering
-- [**ui-engineer**](agents/ui-engineer.md) - UI/UX development specialist
-- [**ux-ui-designer**](agents/ux-ui-designer.md) - User experience design and interface creation expert
-- [**typescript-react-code-reviewer**](agents/typescript-react-code-reviewer.md) - TypeScript, React, and Next.js code review specialist
-- [**senior-dev-test-architect**](agents/senior-dev-test-architect.md) - Senior developer for code review, refactoring, and test strategies
-- [**devops-platform-engineer**](agents/devops-platform-engineer.md) - Cloud infrastructure, CI/CD, and platform reliability expert
-- [**nextjs-app-router-developer**](agents/nextjs-app-router-developer.md) - Build modern Next.js applications using App Router with Server Components
-- [**wordpress-developer**](agents/wordpress-developer.md) - Build professional WordPress solutions with custom themes and plugins
-- [**legacy-modernization-specialist**](agents/legacy-modernization-specialist.md) - Modernize legacy systems, upgrade frameworks, and migrate databases
+### Quick Start
 
-### Product & Process
-- [**product-owner-process-steward**](agents/product-owner-process-steward.md) - Product artifacts validation and documentation consistency
-- [**command-creator**](agents/command-creator.md) - Expert at creating new Claude Code custom commands
-- [**strategic-analyst-ideator**](agents/strategic-analyst-ideator.md) - Market research, competitive analysis, brainstorming, and project discovery
-- [**business-analyst**](agents/business-analyst.md) - Analyze metrics, create reports, and track KPIs
+```bash
+# Apply project-specific presets
+~/.claude/bin/agent preset typescript    # TypeScript/React development
+~/.claude/bin/agent preset python       # Python/ML/data science  
+~/.claude/bin/agent preset php          # PHP/WordPress development
+~/.claude/bin/agent preset fullstack    # Full-stack development
+~/.claude/bin/agent preset devops       # Infrastructure/deployment
+~/.claude/bin/agent preset review       # Code review focused
+~/.claude/bin/agent preset analysis     # Deep analysis & thinking
+~/.claude/bin/agent preset minimal      # Just essentials
 
-### Language Specialists
-- [**javascript-pro**](agents/javascript-pro.md) - Master modern JavaScript with ES6+, async patterns, and Node.js APIs
-- [**php-pro**](agents/php-pro.md) - Write idiomatic PHP code with modern features and performance optimizations
-- [**python-expert**](agents/python-expert.md) - Write idiomatic Python code with advanced features like decorators, generators, and async/await
-- [**typescript-expert**](agents/typescript-expert.md) - Write type-safe TypeScript with advanced type system features, generics, and utility types
+# Individual agent management
+~/.claude/bin/agent enable database-expert
+~/.claude/bin/agent disable python-expert
 
-### Data & AI
-- [**ai-engineer**](agents/ai-engineer.md) - Build LLM applications, RAG systems, and prompt pipelines
-- [**data-engineer**](agents/data-engineer.md) - Build ETL pipelines, data warehouses, and streaming architectures
-- [**data-scientist**](agents/data-scientist.md) - Data analysis expert for SQL queries, BigQuery operations, and data insights
-- [**ml-platform-engineer**](agents/ml-platform-engineer.md) - Build end-to-end ML platforms including pipelines, model serving, and MLOps
-- [**prompt-engineer**](agents/prompt-engineer.md) - Optimizes prompts for LLMs and AI systems
-- [**database-expert**](agents/database-expert.md) - Write complex SQL queries, optimize execution plans, and design schemas
+# View status and available options
+~/.claude/bin/agent list                # Show all agents and status
+~/.claude/bin/agent presets            # List available presets
+~/.claude/bin/agent active             # Show only active agents
+```
 
-### Infrastructure & Operations
-- [**deployment-engineer**](agents/deployment-engineer.md) - Configure CI/CD pipelines, Docker containers, and cloud deployments
+### Available Presets
 
-### Quality & Security
-- [**architect-review**](agents/architect-review.md) - Reviews code changes for architectural consistency and patterns
-- [**command-expert**](agents/command-expert.md) - Create CLI commands for automation and tooling
-- [**dx-optimizer**](agents/dx-optimizer.md) - Developer Experience specialist for improving tooling and workflows
-- [**mcp-testing-engineer**](agents/mcp-testing-engineer.md) - Tests, debugs, and ensures quality for MCP servers
+| Preset | Agents | Use Case |
+|--------|--------|----------|
+| **typescript** | 4 agents | TypeScript/React projects |
+| **python** | 5 agents | Python/ML/data science |
+| **php** | 4 agents | PHP/WordPress development |
+| **fullstack** | 6 agents | Full-stack applications |
+| **devops** | 5 agents | Infrastructure/deployment |
+| **review** | 3 agents | Code review sessions |
+| **analysis** | 5 agents | Deep thinking/analysis |
+| **minimal** | 1 agent | Lightweight sessions |
 
-### Specialized Domains
-- [**api-documenter**](agents/api-documenter.md) - Create OpenAPI/Swagger specs and write developer documentation
-- [**context-manager**](agents/context-manager.md) - Manages context across multiple agents and long-running tasks
-- [**agent-expert**](agents/agent-expert.md) - Create and optimize specialized Claude Code agents
-- [**mcp-server-architect**](agents/mcp-server-architect.md) - Designs and implements MCP servers with protocol compliance
+### Context Benefits
+
+- **90% context reduction**: Load 4-6 relevant agents instead of all 40
+- **Project-specific**: TypeScript projects don't load Python/PHP agents  
+- **Quick switching**: One command changes entire agent configuration
+- **Organized library**: All agents preserved and categorized for reference
+
+### Agent Library
+
+#### 📁 Development & Language Specialists (dev/)
+- [**typescript-expert**](agents-library/dev/typescript-expert.md) - Advanced TypeScript, generics, utility types
+- [**javascript-pro**](agents-library/dev/javascript-pro.md) - Modern JavaScript, ES6+, Node.js APIs
+- [**python-expert**](agents-library/dev/python-expert.md) - Idiomatic Python, decorators, async/await
+- [**php-pro**](agents-library/dev/php-pro.md) - Modern PHP, performance optimizations
+- [**nextjs-app-router-developer**](agents-library/dev/nextjs-app-router-developer.md) - Next.js App Router, Server Components
+- [**ui-engineer**](agents-library/dev/ui-engineer.md) - UI/UX development, responsive design
+- [**wordpress-developer**](agents-library/dev/wordpress-developer.md) - Custom themes, plugins, WordPress
+- [**database-expert**](agents-library/dev/database-expert.md) - Complex SQL, schema design, optimization
+- [**ml-platform-engineer**](agents-library/dev/ml-platform-engineer.md) - ML pipelines, model serving, MLOps
+- [**scrapy-web-scraping-expert**](agents-library/dev/scrapy-web-scraping-expert.md) - Web scraping, data extraction
+
+#### 📁 Code Review Specialists (review/)
+- [**typescript-react-code-reviewer**](agents-library/review/typescript-react-code-reviewer.md) - TypeScript/React code review
+- [**architect-review**](agents-library/review/architect-review.md) - Architectural consistency, patterns
+- [**senior-dev-test-architect**](agents-library/review/senior-dev-test-architect.md) - Code review, refactoring, testing
+
+#### 📁 DevOps & Infrastructure (ops/)
+- [**devops-platform-engineer**](agents-library/ops/devops-platform-engineer.md) - Cloud infrastructure, platform reliability
+- [**deployment-engineer**](agents-library/ops/deployment-engineer.md) - CI/CD pipelines, Docker, deployments
+- [**cloud-run-specialist**](agents-library/ops/cloud-run-specialist.md) - Google Cloud Run deployments
+- [**data-engineer**](agents-library/ops/data-engineer.md) - ETL pipelines, data warehouses
+- [**mcp-server-architect**](agents-library/ops/mcp-server-architect.md) - MCP server design, protocol compliance
+- [**mcp-testing-engineer**](agents-library/ops/mcp-testing-engineer.md) - MCP testing, debugging, quality
+
+#### 📁 Analysis & Thinking (analysis/)
+- [**deep-thinker**](agents-library/analysis/deep-thinker.md) - Enhanced analytical thinking
+- [**ultra-thinker**](agents-library/analysis/ultra-thinker.md) - Ultra-comprehensive analysis
+- [**strategic-analyst-ideator**](agents-library/analysis/strategic-analyst-ideator.md) - Market research, competitive analysis
+- [**business-analyst**](agents-library/analysis/business-analyst.md) - Metrics, reports, KPI tracking
+- [**data-scientist**](agents-library/analysis/data-scientist.md) - Data analysis, SQL, BigQuery
+- [**deep-reflector**](agents-library/analysis/deep-reflector.md) - Session analysis, learning capture
+
+#### 📁 Specialized & Utilities (specialized/)
+- [**ai-engineer**](agents-library/specialized/ai-engineer.md) - LLM applications, RAG systems
+- [**api-documenter**](agents-library/specialized/api-documenter.md) - OpenAPI specs, developer docs
+- [**agent-expert**](agents-library/specialized/agent-expert.md) - Create/optimize Claude Code agents
+- [**command-creator**](agents-library/specialized/command-creator.md) - Create custom Claude Code commands
+- [**context-manager**](agents-library/specialized/context-manager.md) - Multi-agent task coordination
+- [**dx-optimizer**](agents-library/specialized/dx-optimizer.md) - Developer experience, tooling workflows
+- [**instruction-reflector**](agents-library/specialized/instruction-reflector.md) - Improve Claude Code instructions
+- [**insight-documenter**](agents-library/specialized/insight-documenter.md) - Technical breakthrough documentation
+- [**legacy-modernization-specialist**](agents-library/specialized/legacy-modernization-specialist.md) - System modernization, migrations
+- [**product-owner-process-steward**](agents-library/specialized/product-owner-process-steward.md) - Product artifacts, documentation
+- [**prompt-engineer**](agents-library/specialized/prompt-engineer.md) - LLM prompt optimization
+- [**tutorial-engineer**](agents-library/specialized/tutorial-engineer.md) - Educational content, tutorials
+- [**ux-ui-designer**](agents-library/specialized/ux-ui-designer.md) - User experience design
+- [**command-expert**](agents-library/specialized/command-expert.md) - CLI commands, automation tooling
+- [**get-current-datetime**](agents-library/specialized/get-current-datetime.md) - Date/time utilities
 
 
 ## Other

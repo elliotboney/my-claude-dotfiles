@@ -1,0 +1,116 @@
+#!/bin/bash
+
+# Agent management utility for ~/.claude
+# Usage: agent <command> [args]
+
+CLAUDE_DIR="$HOME/.claude"
+AGENTS_DIR="$CLAUDE_DIR/agents"
+LIBRARY_DIR="$CLAUDE_DIR/agents-library"
+PRESETS_DIR="$CLAUDE_DIR/presets"
+
+# Color definitions (256-color mode)
+RED='\033[38;5;1m'
+GREEN='\033[38;5;2m'
+YELLOW='\033[38;5;3m'
+BLUE='\033[38;5;4m'
+PURPLE='\033[38;5;5m'
+CYAN='\033[38;5;202m'
+WHITE='\033[38;5;15m'
+BOLD='\033[1m'
+DIM='\033[2m'
+GRAY='\033[38;5;8m'
+PURPLE_GRAY='\033[38;5;60m'
+SLATE='\033[38;5;102m'
+ORANGE='\033[38;5;14m'
+LIGHT_BLUE='\033[38;5;12m'
+LIGHT_GREEN='\033[38;5;10m'
+LIGHT_RED='\033[38;5;9m'
+LIGHT_PURPLE='\033[38;5;13m'
+LIGHT_CYAN='\033[38;5;14m'
+NC='\033[0m' # No Color
+
+show_help() {
+    echo -e "\n\n\n${CYAN}${BOLD}Agent Management Utility${NC}"
+    echo -e "${WHITE}by ${PURPLE_GRAY}Elliot Boney${NC}"
+    echo
+    
+    echo -e "${YELLOW}Usage:${NC} ${BLUE}agent ${PURPLE}<command> ${ORANGE}[args]${NC}"
+    echo
+    
+    echo -e "${YELLOW}Commands:${NC}"
+    echo -e "  ${GREEN}enable${NC}  ${ORANGE}<agent>${NC}    Enable an agent (create symlink)"
+    echo -e "  ${GREEN}disable${NC} ${ORANGE}<agent>${NC}    Disable an agent (remove symlink)"
+    echo -e "  ${GREEN}list${NC}               List all available and active agents"
+    echo -e "  ${GREEN}preset${NC}  ${ORANGE}<name>${NC}     Apply a preset configuration"
+    echo -e "  ${GREEN}presets${NC}            List available presets"
+    echo -e "  ${GREEN}active${NC}             List only active agents"
+    echo -e "  ${GREEN}available${NC}          List only available agents"
+    echo -e "  ${GREEN}status${NC}             Show current agent status"
+    echo -e "  ${GREEN}help${NC}               Show this help"
+    echo
+    
+    echo -e "${YELLOW}Examples:${NC}"
+    echo -e "  ${BLUE}agent ${PURPLE}enable ${ORANGE}typescript-expert${NC}"
+    echo -e "  ${BLUE}agent ${PURPLE}disable ${ORANGE}python-expert${NC}"
+    echo -e "  ${BLUE}agent ${PURPLE}preset ${ORANGE}typescript${NC}"
+    echo -e "  ${BLUE}agent ${PURPLE}list${NC}"
+    echo -e "  \n\n"
+}
+
+case "$1" in
+    enable)
+        if [[ -z "$2" ]]; then
+            echo -e "${YELLOW}Usage:${NC} ${BLUE}agent ${PURPLE}enable ${ORANGE}<agent-name>${NC}"
+            exit 1
+        fi
+        "$CLAUDE_DIR/bin/agent-enable" "$2"
+        ;;
+    disable)
+        if [[ -z "$2" ]]; then
+            echo -e "${YELLOW}Usage:${NC} ${BLUE}agent ${PURPLE}disable ${ORANGE}<agent-name>${NC}"
+            exit 1
+        fi
+        "$CLAUDE_DIR/bin/agent-disable" "$2"
+        ;;
+    list|status)
+        "$CLAUDE_DIR/bin/agent-list"
+        ;;
+    preset)
+        if [[ -z "$2" ]]; then
+            echo -e "${YELLOW}Usage:${NC} ${BLUE}agent ${PURPLE}preset ${ORANGE}<preset-name>${NC}"
+            echo -e "${YELLOW}Available presets:${NC}"
+            ls "$PRESETS_DIR" | sed 's/\.txt$//' | sed "s/^/  ${GREEN}/" | sed "s/$/${NC}/"
+            exit 1
+        fi
+        "$CLAUDE_DIR/bin/agent-preset" "$2"
+        ;;
+    presets)
+        echo -e "${YELLOW}Available presets:${NC}"
+        ls "$PRESETS_DIR" | sed 's/\.txt$//' | sed "s/^/  ${GREEN}/" | sed "s/$/${NC}/"
+        ;;
+    active)
+        echo -e "${YELLOW}Active agents:${NC}"
+        if [[ -d "$AGENTS_DIR" ]] && [[ -n "$(ls -A "$AGENTS_DIR" 2>/dev/null)" ]]; then
+            ls "$AGENTS_DIR" | sed 's/\.md$//' | sed "s/^/  ${GREEN}/" | sed "s/$/${NC}/"
+        else
+            echo -e "  ${GRAY}(none)${NC}"
+        fi
+        ;;
+    available)
+        echo -e "${YELLOW}Available agents by category:${NC}"
+        for category in dev review ops analysis specialized; do
+            echo -e "  ${PURPLE}$category:${NC}"
+            if [[ -d "$LIBRARY_DIR/$category" ]]; then
+                ls "$LIBRARY_DIR/$category" | sed 's/\.md$//' | sed "s/^/    ${GREEN}/" | sed "s/$/${NC}/"
+            fi
+        done
+        ;;
+    help|--help|-h|"")
+        show_help
+        ;;
+    *)
+        echo -e "${RED}Unknown command: ${ORANGE}$1${NC}"
+        echo -e "Use '${BLUE}agent ${PURPLE}help${NC}' for usage information."
+        exit 1
+        ;;
+esac

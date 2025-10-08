@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Enable an agent by creating a symlink
+
+CLAUDE_DIR="$HOME/.claude"
+AGENTS_DIR="$CLAUDE_DIR/agents"
+LIBRARY_DIR="$CLAUDE_DIR/agents-library"
+
+AGENT_NAME="$1"
+
+if [[ -z "$AGENT_NAME" ]]; then
+    echo "Usage: agent-enable <agent-name>"
+    exit 1
+fi
+
+# Ensure agents directory exists
+mkdir -p "$AGENTS_DIR"
+
+# Find the agent in the library
+AGENT_FILE=""
+for category in dev review ops analysis specialized; do
+    if [[ -f "$LIBRARY_DIR/$category/${AGENT_NAME}.md" ]]; then
+        AGENT_FILE="$LIBRARY_DIR/$category/${AGENT_NAME}.md"
+        break
+    fi
+done
+
+if [[ -z "$AGENT_FILE" ]]; then
+    echo "Agent '$AGENT_NAME' not found in library"
+    echo "Available agents:"
+    find "$LIBRARY_DIR" -name "*.md" -exec basename {} .md \; | sort | sed 's/^/  /'
+    exit 1
+fi
+
+# Check if already enabled
+if [[ -L "$AGENTS_DIR/${AGENT_NAME}.md" ]]; then
+    echo "Agent '$AGENT_NAME' is already enabled"
+    exit 0
+fi
+
+# Create symlink
+ln -s "$AGENT_FILE" "$AGENTS_DIR/${AGENT_NAME}.md"
+echo "Enabled agent: $AGENT_NAME"
