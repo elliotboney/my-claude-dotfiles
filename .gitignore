@@ -41,3 +41,17 @@ settings.json
 
 history.jsonl
 
+# Cache and temporary data
+cache/
+debug/
+file-history/
+paste-cache/
+plans/
+tasks/
+stats-cache.json
+
+# Plugin cache files
+plugins/install-counts-cache.json
+plugins/known_marketplaces.json
+plugins/marketplaces/
+

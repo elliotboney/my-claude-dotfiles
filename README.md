@@ -161,6 +161,71 @@ The agent system has been restructured for efficient context management. Instead
 - [**get-current-datetime**](agents-library/specialized/get-current-datetime.md) - Date/time utilities
 
 
+## Status Line
+
+A custom 2-line status line that shows real-time usage data from the Anthropic API. Configured in `settings.json` and powered by [`statusline.sh`](statusline.sh).
+
+### What it shows
+
+| Line | Content |
+|------|---------|
+| **Line 1** | Model name, context progress bar with tokens used/total, thinking on/off |
+| **Line 2** | Two progress bars: current (5h window), weekly (7d) |
+
+### How it works
+
+- Reads the OAuth token from the **macOS Keychain** (`Claude Code-credentials` entry)
+- Calls `https://api.anthropic.com/api/oauth/usage` to get real utilization percentages
+- Caches the API response to `/tmp/claude-statusline-usage-cache.json` with a **5-minute TTL** to avoid excessive API calls
+- Falls back to stale cache if the API call fails
+- Context window data comes from the status line JSON input (no API call needed)
+
+### Color scheme
+
+- **Context bar** (line 1): cyan → blue → yellow → red — shifts to warning colors as context fills and quality may degrade
+- **Usage bars** (line 2, current & weekly): green → orange → yellow → red as utilization increases
+- Uses true-color ANSI (24-bit RGB) matching oh-my-posh theme colors
+
+#### Context bar thresholds
+
+| Usage | Color | Meaning |
+|-------|-------|---------|
+| 0-49% | Cyan | Plenty of room |
+| 50-69% | Blue | Moderate usage |
+| 70-89% | Yellow | Quality may start degrading |
+| 90%+ | Red | Near capacity, auto-compaction likely |
+
+### Configuration
+
+Edit the top of `statusline.sh` to adjust:
+
+```bash
+CACHE_MAX_AGE=300  # seconds between API calls (5 minutes)
+```
+
+The status line is wired up in `settings.json`:
+
+```json
+{
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
+  }
+}
+```
+
+### Extra usage
+
+If extra usage billing is enabled on your Anthropic account, the status line will automatically show an additional progress bar on line 2 with `$used/$limit`.
+
+### Requirements
+
+- macOS (uses `security` CLI for Keychain access)
+- `jq` for JSON parsing
+- `python3` for ISO 8601 date formatting
+- `curl` for API calls
+- Claude Code with OAuth login (Max plan recommended)
+
 ## Other
 - I also use [ccnotify](https://github.com/dazuiba/CCNotify) to get pings when stuff is done. (Mac only)
 
