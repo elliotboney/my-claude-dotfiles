@@ -65,8 +65,8 @@ build_bar() {
   [ "$pct" -ge 90 ] && clr="$RED"
 
   local bar_filled="" bar_empty=""
-  for ((i=0; i<filled; i++)); do bar_filled+="●"; done
-  for ((i=0; i<empty; i++)); do bar_empty+="○"; done
+  for ((i=0; i<filled; i++)); do bar_filled+="█"; done
+  for ((i=0; i<empty; i++)); do bar_empty+="░"; done
 
   printf "%s%s%s%s%s" "$clr" "$bar_filled" "$DIM" "$bar_empty" "$RST"
 }
@@ -85,8 +85,8 @@ build_ctx_bar() {
   [ "$pct" -ge 90 ] && clr="$RED"
 
   local bar_filled="" bar_empty=""
-  for ((i=0; i<filled; i++)); do bar_filled+="●"; done
-  for ((i=0; i<empty; i++)); do bar_empty+="○"; done
+  for ((i=0; i<filled; i++)); do bar_filled+="█"; done
+  for ((i=0; i<empty; i++)); do bar_empty+="░"; done
 
   printf "%s%s%s%s%s" "$clr" "$bar_filled" "$DIM" "$bar_empty" "$RST"
 }

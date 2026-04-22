@@ -1,9 +1,9 @@
-
-
+backups/
+image-cache/
 projects/
 todos/
 ide/
-
+sessions/
 # Temporary and cache files
 **/.DS_Store
 **/Thumbs.db
