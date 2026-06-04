@@ -55,3 +55,16 @@ plugins/install-counts-cache.json
 plugins/known_marketplaces.json
 plugins/marketplaces/
 
+# rando skills
+skills/web-design-engineer/
+skills/website-design/
+skills/overwhelmed
+
+
+.last-cleanup
+RTK.md
+claude-code-history-for-preamble.md
+mcp-needs-auth-cache.json
+plugins/plugin-catalog-cache.json
+settings.json.bak
+plugins/*
