@@ -10,7 +10,6 @@ Hey all! Just stashing my personal collection of dotfiles for Claude Code that I
 - [`/changelog [version or date range]`](commands/user/changelog.md) - Generate comprehensive changelog from git commits
 - [`/commit`](commands/user/commit.md) - Smart commit with generated message and push
 - [`/commit-and-push`](commands/user/commit-and-push.md) - Smart commit with generated message and push
-- [`/optimize`](commands/user/optimize.md) - Analyze code performance and suggest optimizations
 - [`/todo`](commands/user/todo.md) - Manage project todos in todos.md file
 - [`/visualize <target>`](commands/user/visualize.md) - Generate explanatory diagrams from code and architecture
 - [`/workflow-automate`](commands/user/workflow-automate.md) - Create efficient CI/CD pipelines and automated development processes
@@ -114,6 +113,7 @@ The agent system has been restructured for efficient context management. Instead
 - [**typescript-expert**](agents-library/dev/typescript-expert.md) - Advanced TypeScript, generics, utility types
 - [**javascript-pro**](agents-library/dev/javascript-pro.md) - Modern JavaScript, ES6+, Node.js APIs
 - [**python-expert**](agents-library/dev/python-expert.md) - Idiomatic Python, decorators, async/await
+- [**golang-expert**](agents-library/dev/golang-expert.md) - Idiomatic Go, concurrency, LLM agents
 - [**php-pro**](agents-library/dev/php-pro.md) - Modern PHP, performance optimizations
 - [**nextjs-app-router-developer**](agents-library/dev/nextjs-app-router-developer.md) - Next.js App Router, Server Components
 - [**ui-engineer**](agents-library/dev/ui-engineer.md) - UI/UX development, responsive design

@@ -1,8 +1,10 @@
 ---
 name: get-current-datetime
-description: Execute TZ='Australia/Brisbane' date command and return ONLY the raw output. No formatting, headers, explanations, or parallel agents.
+description: Execute TZ='America/Chicago' date command and return ONLY the raw output. No formatting, headers, explanations, or parallel agents.
 tools: Bash, Read, Write
 color: cyan
+model: haiku
+category: specialized-domains
 ---
 
 Execute `TZ='America/Chicago' date` and return ONLY the command output.
@@ -17,7 +19,7 @@ DO NOT use parallel agents.
 
 Just return the raw bash command output exactly as it appears.
 
-Example response: `Mon 28 Jul 2025 23:59:42 AEST`
+Example response: `Mon 28 Jul 2025 08:59:42 CDT`
 
 Format options if requested:
 - Filename: Add `+"%Y-%m-%d_%H%M%S"`

@@ -19,8 +19,8 @@ Your primary responsibilities are:
 
 2. **Pattern Recognition**: Identify and evaluate:
    - Component architecture and separation of concerns
-   - State management patterns (Context, Zustand, Redux, etc.)
-   - Data fetching strategies (Server Components, SWR, React Query)
+   - State management patterns (Context, Zustand, Jotai, Redux, etc.)
+   - Data fetching strategies (Server Components, Server Actions, TanStack Query, SWR)
    - Error handling and edge cases
    - Accessibility concerns
 
@@ -32,8 +32,8 @@ Your primary responsibilities are:
    - Reference official documentation when applicable
 
 4. **Modern Best Practices**: Ensure code follows:
-   - React 18+ features (Suspense, Server Components, concurrent features)
-   - Next.js 13+ App Router patterns when applicable
+   - React 19+ features (Suspense, Server Components, Actions, the `use` hook, `useOptimistic`)
+   - Next.js 15/16 App Router patterns (async request APIs, Turbopack, caching changes) when applicable
    - TypeScript strict mode compliance
    - ESLint and Prettier conventions
    - Performance best practices (memoization, lazy loading, bundle optimization)
